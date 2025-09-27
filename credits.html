@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Credits</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin:0;
+  padding:0;
+  background:#000;
+  color:#fff;
+  font-family:system-ui, sans-serif;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+}
+
+/* Stars background */
+#bg-canvas {
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
+
+/* Content styling */
+h1 {
+font-size:2.5em;
+margin-bottom:20px;
+text-shadow:0 0 20px #7e5bef, 0 0 40px #b68aff;
+}
+
+p {
+font-size:1.2em;
+max-width:600px;
+margin:10px auto;
+line-height:1.5;
+}
+
+button {
+margin-top:20px;
+padding:10px 20px;
+font-size:1.2em;
+border:none;
+border-radius:8px;
+background:#7e5bef;
+color:#fff;
+cursor:pointer;
+box-shadow:0 0 15px #7e5bef,0 0 30px #b68aff;
+transition:transform .2s;
+}
+button:hover {
+transform:scale(1.1);
+} </style>
+
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<h1>Credits</h1>
+<p>Website created by <strong>F3rr3tz  </strong>.</p>
+<p>Music: <em>"keeping secrets - wifiskeleton"</em></p>
+<p>Join the discord! discord.gg/DnDk86tM74</p>
+<p>Email f3rr3tz@f3rr3tz.uk for suggestions to website.</p>
+<p>This was made from help with chatgpt idk how tf to code 😭🙏</p>
+
+<button id="back-btn">⬅ Back to Home</button>
+
+<script>
+// Starfield background
+const canvas=document.getElementById('bg-canvas'),ctx=canvas.getContext('2d'),stars=[];
+const numStars=120;
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+window.addEventListener('resize',resizeCanvas);resizeCanvas();
+for(let i=0;i<numStars;i++){stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5+0.5,speed:Math.random()*0.5+0.2});}
+function animateStars(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='white';
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+    s.y+=s.speed;
+    if(s.y>canvas.height) s.y=0;
+  });
+  requestAnimationFrame(animateStars);
+}
+animateStars();
+
+// Back button closes page
+document.getElementById('back-btn').addEventListener('click',()=>{
+  window.close();
+});
+</script>
+
+</body>
+</html>
